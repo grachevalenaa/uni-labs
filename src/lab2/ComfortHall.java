@@ -1,8 +1,6 @@
 package lab2;
 
-
-public class MovieTheaterHall {
-
+public class ComfortHall extends Hall {
     private final int COLUMNS;
 
     private final int ROWS;
@@ -11,7 +9,7 @@ public class MovieTheaterHall {
 
     private MovieTheater movieTheater;
 
-    MovieTheaterHall(int rows, int columns, int price, MovieTheater movieTheater) {
+    public ComfortHall(int rows, int columns, int price, MovieTheater movieTheater) {
         COLUMNS = columns;
         ROWS = rows;
         hallMatrix = new int[ROWS][COLUMNS];
@@ -23,11 +21,7 @@ public class MovieTheaterHall {
         }
     }
 
-    public MovieTheater getMovieTheater() {
-        return movieTheater;
-    }
-
-    MovieTheaterHall(int columns, int firstNumOfRows, int firstPrice, int secondNumOfRows, int secondPrice, MovieTheater movieTheater) {
+    public ComfortHall(int columns, int firstNumOfRows, int firstPrice, int secondNumOfRows, int secondPrice, MovieTheater movieTheater) {
         COLUMNS = columns;
         ROWS = firstNumOfRows + secondNumOfRows;
         hallMatrix = new int[ROWS][COLUMNS];
@@ -46,7 +40,6 @@ public class MovieTheaterHall {
 
     @Override
     public String toString() {
-
         for (int i = 1; i <= COLUMNS; ++i) {
             System.out.print("  " + i + "  ");
         }
@@ -55,30 +48,39 @@ public class MovieTheaterHall {
 
         for (int i = 1; i <= ROWS; ++i) {
             for (int j = 0; j < COLUMNS; ++j) {
-                if (hallMatrix[i-1][j] < 0) {
+                if (hallMatrix[i - 1][j] < 0) {
                     System.out.print("[   ]");
                     continue;
                 }
-                System.out.print("[" + hallMatrix[i-1][j] + "]");
+                System.out.print("[" + hallMatrix[i - 1][j] + "]");
             }
             System.out.println(" " + i);
+            System.out.println();
         }
         return null;
     }
 
+    @Override
+    public Halls getTypeOfHall() {
+        return Halls.COMFORT;
+    }
+    @Override
     public int getCOLUMNS() {
         return COLUMNS;
     }
 
+    @Override
     public int getROWS() {
         return ROWS;
     }
 
+    @Override
     public int[][] getHallMatrix() {
         return hallMatrix;
     }
 
-    public void changeSeatStatus(int row, int column) {
-        hallMatrix[row][column] = 0;
+    @Override
+    public MovieTheater getMovieTheater() {
+        return movieTheater;
     }
 }
